@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -29,16 +30,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Y9I-T5-FoO">
-                                            <rect key="frame" x="20" y="71.5" width="26.5" height="16"/>
+                                            <rect key="frame" x="20" y="73.5" width="26.5" height="16"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PJh-h1-6jb">
-                                            <rect key="frame" x="20" y="90" width="67" height="24"/>
+                                            <rect key="frame" x="20" y="92" width="62" height="21.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -53,7 +54,21 @@
                             <outlet property="delegate" destination="YgG-tn-0yE" id="wab-nZ-Wto"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="City Weather" id="Egv-BM-6L1"/>
+                    <navigationItem key="navigationItem" title="City Weather" id="Egv-BM-6L1">
+                        <barButtonItem key="rightBarButtonItem" title="Change Date" style="plain" id="NsV-nc-NKe">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LAB-vR-gsW">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change Date"/>
+                                <connections>
+                                    <action selector="changeDatePressed:" destination="YgG-tn-0yE" eventType="touchUpInside" id="s9h-rf-EXV"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="eVR-SZ-5bC" kind="show" identifier="toChangeDate" id="zeb-1d-ujr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="iq2-N1-i8p" id="aLN-cl-AvH"/>
                     </connections>
@@ -61,6 +76,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FkB-XL-Jtc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1044.9275362318842" y="122.54464285714285"/>
+        </scene>
+        <!--ChangeDateViewController-->
+        <scene sceneID="R3w-Ap-nru">
+            <objects>
+                <viewController title="ChangeDateViewController" id="eVR-SZ-5bC" customClass="ChangeDateViewController" customModule="WeatherMDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zV3-Bt-sa6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="e8J-Ny-pcQ">
+                                <rect key="frame" x="0.0" y="321" width="414" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F15-1q-gU2">
+                                <rect key="frame" x="149" y="191" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xog-VV-KU2">
+                                <rect key="frame" x="134" y="592" width="146" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="donePressed:" destination="eVR-SZ-5bC" eventType="touchUpInside" id="ufO-LA-fb5"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="gNr-hT-Aiu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FUH-tz-DVe"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="F15-1q-gU2" id="szS-Ud-AKa"/>
+                        <outlet property="datesButton" destination="e8J-Ny-pcQ" id="WDV-j6-tho"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3s3-MG-s9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1721.7391304347827" y="118.52678571428571"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aJe-TP-Ve6">

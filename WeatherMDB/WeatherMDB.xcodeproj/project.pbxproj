@@ -15,6 +15,7 @@
 		F83AE5462414B07600E59A70 /* WeatherMDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AE5452414B07600E59A70 /* WeatherMDBTests.swift */; };
 		F83AE5512418AC6100E59A70 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AE5502418AC6100E59A70 /* Weather.swift */; };
 		F83AE5532418AF3400E59A70 /* WeatherTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AE5522418AF3400E59A70 /* WeatherTableViewController.swift */; };
+		F83AE55A2419B27600E59A70 /* ChangeDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83AE5592419B27600E59A70 /* ChangeDateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		F83AE5472414B07600E59A70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F83AE5502418AC6100E59A70 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		F83AE5522418AF3400E59A70 /* WeatherTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewController.swift; sourceTree = "<group>"; };
+		F83AE5592419B27600E59A70 /* ChangeDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeDateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				F83AE5392414B07600E59A70 /* LaunchScreen.storyboard */,
 				F83AE53C2414B07600E59A70 /* Info.plist */,
 				F83AE5522418AF3400E59A70 /* WeatherTableViewController.swift */,
+				F83AE5592419B27600E59A70 /* ChangeDateViewController.swift */,
 			);
 			path = WeatherMDB;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				F83AE5532418AF3400E59A70 /* WeatherTableViewController.swift in Sources */,
 				F83AE5512418AC6100E59A70 /* Weather.swift in Sources */,
+				F83AE55A2419B27600E59A70 /* ChangeDateViewController.swift in Sources */,
 				F83AE52F2414B07300E59A70 /* AppDelegate.swift in Sources */,
 				F83AE5312414B07300E59A70 /* SceneDelegate.swift in Sources */,
 			);

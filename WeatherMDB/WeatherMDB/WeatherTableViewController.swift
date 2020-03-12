@@ -9,13 +9,22 @@
 import UIKit
 import CoreLocation
 
+var date: Date? = nil
+
 class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
   
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBAction func changeDatePressed(_ sender: Any) {
+        performSegue(withIdentifier: "toChangeDate", sender: self)
+    }
     var locationManager = CLLocationManager()
     
     var forecastData = [Weather]()
+    
+    var firstTimeOpened = 1
+        
+    var userLocation: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +36,26 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         locationManager.startMonitoringSignificantLocationChanges()
         
         searchBar.delegate = self
-        
+                
         updateWeatherForLocation(location: "New York")
+        
+        tableView.tableFooterView = UIView()
+        
+        if firstTimeOpened == 1 {
+            weather(self)
+            firstTimeOpened += 1
+        }
+    
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if userLocation != nil {
+            updateWeatherForLocation(location: userLocation)
+        }
+        else {
+            updateWeatherForLocation(location: "New York")
+        }
     }
     
     func weather(_ sender: Any) {
@@ -60,17 +87,22 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        if let locationString = searchBar.text, !locationString.isEmpty {
+        if let locationString = searchBar.text,
+            !locationString.isEmpty {
+            userLocation = locationString
+            date = nil
             updateWeatherForLocation(location: locationString)
         }
     }
 
     func updateWeatherForLocation (location: String) {
         CLGeocoder().geocodeAddressString(location) { (placemarks:[CLPlacemark]?, error: Error?) in
-            //self.weather(self)
             if error == nil {
+                if let date = date {
+                    //print(self.date)
                 if let location = placemarks?.first?.location {
-                    Weather.forecast(withLocation: location.coordinate, completion: { (results:[Weather]?) in
+    
+                    Weather.forecast(withLocation: location.coordinate, date: Int(date.timeIntervalSince1970), completion: { (results:[Weather]?) in
                         if let weatherData = results {
                             self.forecastData = weatherData
                             
@@ -80,8 +112,24 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
                         }
                         
                     })
+                    }
+                }
+                else {
+                    if let location = placemarks?.first?.location {
+                
+                    Weather.forecast(withLocation: location.coordinate, date: 0, completion: { (results:[Weather]?) in
+                                if let weatherData = results {
+                                    self.forecastData = weatherData
+                                    
+                                    DispatchQueue.main.async {
+                                        self.tableView.reloadData()
+                                }
+                            }
+                        })
+                    }
                 }
             }
+            
         }
     }
     
@@ -99,12 +147,28 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let date = Calendar.current.date(byAdding: .day, value: section, to: Date())
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25)) //set these values as necessary
+            returnedView.backgroundColor = .black
+
+        let label = UILabel(frame: CGRect(x: 10, y: 3, width: view.frame.size.width, height: 25))
+
+         var filteredDate: Date!
+              if let date = date {
+                  filteredDate = Calendar.current.date(byAdding: .day, value: section, to: date)
+              }
+              else {
+                  filteredDate = Calendar.current.date(byAdding: .day, value: section, to: Date())
+              }
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM dd, yyyy"
         
-        return dateFormatter.string(from: date!)
+        label.text = dateFormatter.string(from: filteredDate)
+        label.textColor = .white
+        returnedView.addSubview(label)
+
+        return returnedView
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,55 +178,21 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
         
         cell.textLabel?.text = weatherObject.summary
         cell.detailTextLabel?.text = "\(Int(weatherObject.temperature)) °F"
-        cell.imageView?.image = UIImage(named: weatherObject.icon)
+        cell.imageView?.image = imageWithImage(image: UIImage(named: weatherObject.icon)!, scaledToSize: CGSize(width: 50, height: 50))
         
         return cell
     }
-
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
-    */
+    
+    
+   
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

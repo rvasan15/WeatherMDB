@@ -35,10 +35,21 @@ struct Weather {
     
     
     static let basePath = "https://api.darksky.net/forecast/f94f4ec34816b017de159385b96c8574/"
+
     
-    static func forecast (withLocation location:CLLocationCoordinate2D, completion: @escaping ([Weather]?) -> ()) {
+    static func forecast (withLocation location:CLLocationCoordinate2D, date: Int, completion: @escaping ([Weather]?) -> ()) {
+
+        var url = ""
         
-        let url = basePath + "\(location.latitude),\(location.longitude)"
+        if date != 0 {
+        
+            url = basePath + "\(location.latitude),\(location.longitude),\(date)"
+        }
+        
+        else {
+            url = basePath + "\(location.latitude),\(location.longitude)"
+        }
+                
         let request = URLRequest(url: URL(string: url)!)
         
         let task = URLSession.shared.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
