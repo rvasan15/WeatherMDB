@@ -8,11 +8,16 @@
 
 import Foundation
 import CoreLocation
+import AVFoundation
+
+var synth = AVSpeechSynthesizer()
+var utterance = AVSpeechUtterance(string: "")
 
 struct Weather {
     let summary:String
     let icon:String
     let temperature:Double
+    
     
     enum SerializationError:Error {
         case missing(String)
@@ -35,6 +40,7 @@ struct Weather {
     
     
     static let basePath = "https://api.darksky.net/forecast/f94f4ec34816b017de159385b96c8574/"
+    
 
     
     static func forecast (withLocation location:CLLocationCoordinate2D, date: Int, completion: @escaping ([Weather]?) -> ()) {
@@ -65,6 +71,11 @@ struct Weather {
                                 for dataPoint in dailyData {
                                     if let weatherObject = try? Weather(json: dataPoint) {
                                         forecastArray.append(weatherObject)
+//                                        guard let summary = json["summary"] as? String else {throw SerializationError.missing("summary is missing")}
+//                                          guard let temperature = json["temperatureMax"] as? Double else {throw SerializationError.missing("temp is missing")}
+//                                        utterance = AVSpeechUtterance(string: "Weather data for \(summary): It is \(temperature) outside.")
+//                                        utterance.rate = 0.4
+//                                        synth.speak(utterance)
                                     }
                                 }
                             }

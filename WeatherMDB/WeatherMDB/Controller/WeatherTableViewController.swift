@@ -8,16 +8,27 @@
 
 import UIKit
 import CoreLocation
+import AVFoundation
 
 var date: Date? = nil
 
 class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CLLocationManagerDelegate {
-  
+    
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBAction func speakPressed(_ sender: Any) {
+        let utterance = AVSpeechUtterance(string: textToSpeak)
+        synthesizer.speak(utterance)
+    }
     
     @IBAction func changeDatePressed(_ sender: Any) {
         performSegue(withIdentifier: "toChangeDate", sender: self)
     }
+    
+    let synthesizer = AVSpeechSynthesizer()
+    
+    let textToSpeak = "Hello, how are things?"
+    
     var locationManager = CLLocationManager()
     
     var forecastData = [Weather]()

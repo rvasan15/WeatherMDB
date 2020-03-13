@@ -86,15 +86,9 @@
 				F83AE5562418CDC200E59A70 /* Controller */,
 				F83AE5552418CDBE00E59A70 /* View */,
 				F83AE5542418CDB000E59A70 /* Model */,
-				F83AE5502418AC6100E59A70 /* Weather.swift */,
-				F83AE52E2414B07300E59A70 /* AppDelegate.swift */,
-				F83AE5302414B07300E59A70 /* SceneDelegate.swift */,
-				F83AE5342414B07300E59A70 /* Main.storyboard */,
 				F83AE5372414B07600E59A70 /* Assets.xcassets */,
 				F83AE5392414B07600E59A70 /* LaunchScreen.storyboard */,
 				F83AE53C2414B07600E59A70 /* Info.plist */,
-				F83AE5522418AF3400E59A70 /* WeatherTableViewController.swift */,
-				F83AE5592419B27600E59A70 /* ChangeDateViewController.swift */,
 			);
 			path = WeatherMDB;
 			sourceTree = "<group>";
@@ -111,6 +105,7 @@
 		F83AE5542418CDB000E59A70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F83AE5342414B07300E59A70 /* Main.storyboard */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -125,6 +120,11 @@
 		F83AE5562418CDC200E59A70 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F83AE5522418AF3400E59A70 /* WeatherTableViewController.swift */,
+				F83AE5592419B27600E59A70 /* ChangeDateViewController.swift */,
+				F83AE5502418AC6100E59A70 /* Weather.swift */,
+				F83AE52E2414B07300E59A70 /* AppDelegate.swift */,
+				F83AE5302414B07300E59A70 /* SceneDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
