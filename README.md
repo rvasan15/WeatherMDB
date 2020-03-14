@@ -6,9 +6,14 @@ There is also a button where you can change the date to look at previous tempera
 where if the user pressed the speak button, they will be able to hear the weather instead of having to read it.
 
 <h4>This is the screen that will appear when you open the app. The weather will show based off of your location:</h4>
+<img src = "first.png" width = "40%">
 
 <h4>This is the screen that will appear when the user searches up the weather for a different place in the world:</h4>
+<img src = "second.png" width = "40%">
 
 <h4>This is the screen that will appear when the user presses the change date button to choose a date in the past:</h4>
+<img src = "third.png" width = "40%">
 
 <h4>This is the screen that will appear when the user has changed the date to a previous one:</h4>
+<img src = "fourth.png" width = "40%">
+
