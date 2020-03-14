@@ -18,7 +18,9 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
     
     @IBAction func speakPressed(_ sender: Any) {
         let utterance = AVSpeechUtterance(string: textToSpeak)
+        utterance.rate = 0.4
         synthesizer.speak(utterance)
+        print("Speak pressed is called")
     }
     
     @IBAction func changeDatePressed(_ sender: Any) {
@@ -27,7 +29,7 @@ class WeatherTableViewController: UITableViewController, UISearchBarDelegate, CL
     
     let synthesizer = AVSpeechSynthesizer()
     
-    let textToSpeak = "Hello, how are things?"
+    let textToSpeak = "Hello World!"
     
     var locationManager = CLLocationManager()
     
