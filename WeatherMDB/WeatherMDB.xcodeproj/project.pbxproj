@@ -86,9 +86,6 @@
 				F83AE5562418CDC200E59A70 /* Controller */,
 				F83AE5552418CDBE00E59A70 /* View */,
 				F83AE5542418CDB000E59A70 /* Model */,
-				F83AE5372414B07600E59A70 /* Assets.xcassets */,
-				F83AE5392414B07600E59A70 /* LaunchScreen.storyboard */,
-				F83AE53C2414B07600E59A70 /* Info.plist */,
 			);
 			path = WeatherMDB;
 			sourceTree = "<group>";
@@ -105,6 +102,8 @@
 		F83AE5542418CDB000E59A70 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F83AE53C2414B07600E59A70 /* Info.plist */,
+				F83AE5392414B07600E59A70 /* LaunchScreen.storyboard */,
 				F83AE5342414B07300E59A70 /* Main.storyboard */,
 			);
 			path = Model;
@@ -113,6 +112,7 @@
 		F83AE5552418CDBE00E59A70 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F83AE5372414B07600E59A70 /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
